@@ -67,34 +67,34 @@ function status2() {
 boardReady(
     { board: "Smart", device: "10QGMYby", transport: "mqtt" },
     function (board) {
-        board.samplingInterval = 1000;
-        status_text = "";
-        adxl = getADXL345(board);
-        myData = {};
-        myData.sheetUrl =
-            "https://docs.google.com/spreadsheets/d/1FwnrehFAzFVsYTk0mcMIqiEITqR6LWGKqeNQ4nH0jLc/edit?usp=sharing";
-        myData.sheetName = "DAL";
-        x = 0;
-        y = 0;
-        adxl.setSensitivity = 0;
-        adxl.setBaseAxis = "x";
-        adxl.detect(function (_x, _y, _z, _r, _p) {
-            adxl._x = _x;
-            adxl._y = _y;
-            adxl._z = _z;
-            adxl._r = _r;
-            adxl._p = _p;
-            x = Math.round(Math.abs(adxl._z - y) * 100000) / 100000;
-            document.getElementById("demo-area-01-show").innerHTML = [
-                x,
-                "<br/>",
-                String("status : ") + String(status_text),
-            ].join("");
-            status2();
-            y = adxl._z;
+    board.samplingInterval = 1000;
+    status_text = "";
+    adxl = getADXL345(board);
+    myData = {};
+    myData.sheetUrl =
+        "https://docs.google.com/spreadsheets/d/1FwnrehFAzFVsYTk0mcMIqiEITqR6LWGKqeNQ4nH0jLc/edit?usp=sharing";
+    myData.sheetName = "DAL";
+    x = 0;
+    y = 0;
+    adxl.setSensitivity = 0;
+    adxl.setBaseAxis = "x";
+    adxl.detect(function (_x, _y, _z, _r, _p) {
+        adxl._x = _x;
+        adxl._y = _y;
+        adxl._z = _z;
+        adxl._r = _r;
+        adxl._p = _p;
+        x = Math.round(Math.abs(adxl._z - y) * 100000) / 100000;
+        document.getElementById("demo-area-01-show").innerHTML = [
+            x,
+            "<br/>",
+            String("status : ") + String(status_text),
+        ].join("");
+        status2();
+        y = adxl._z;
         });
         setInterval(function () {
-            write();
+        write();
         }, 1000 * 30);
     }
 );
