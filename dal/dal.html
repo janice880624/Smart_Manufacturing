@@ -32,6 +32,7 @@
         <link href="../css/bootstrap.min.css" rel="stylesheet">
 
         <!-- Template Stylesheet -->
+        <link href="dal.css" rel="stylesheet">
         <link href="../css/style.css" rel="stylesheet">
 
         <!-- Webduino -->
@@ -81,19 +82,59 @@
             <!-- Content Start -->
             <div class="content">
 
-                <div class="card text-center">
-                    <div class="card-header">
-                        Featured
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">Special title treatment</h5>
-                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                <!-- Lab Info -->
+                <div class="container-fluid pt-4 px-4">
+                    <div class="row g-4">
+                        <div class="col-sm-6 col-xl-3">
+                            <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
+                                <img src="../img/thermometer.png" alt="Temperature" class="img_card">
+                                <div>
+                                    <p class="mb-2"> Temperature </p>
+                                    <h6 class="mb-0 temperature" id="firebase-tem-show">$1234</h6>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-xl-3">
+                            <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
+                                <img src="../img/humidity.png" alt="Humidity" class="img_card">
+                                <div>
+                                    <p class="mb-2"> Humidity </p>
+                                    <h6 class="mb-0 humidity" id="firebase-hum-show">$1234</h6>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-xl-3">
+                            <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
+                                <img src="../img/air-pollution.png" alt="PM 2.5" class="img_card">
+                                <div>
+                                    <p class="mb-2"> AQI PM 2.5 </p>
+                                    <h6 class="mb-0 pm25" id="firebase-pm25-show">$1234</h6>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-xl-3">
+                            <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
+                                <img src="../img/dust.png" alt="PM 10" class="img_card">
+                                <div>
+                                    <p class="mb-2"> AQI PM 10 </p>
+                                    <h6 class="mb-0 pm10" id="firebase-pm10-show">$1234</h6>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <div><span id="firebase-date-show"> firebase-date-show </span></div>
-                <div><span id="firebase-time-show"> firebase-time-show </span></div>
-                <div><span id="firebase-status-show"> firebase-status-show </span></div>
+
+                <div class="container-fluid pt-4 px-4">
+                    <div class="card text-center">
+                        <div class="card-header"> Personnel access control </div>
+                        <div class="card-body">
+                            <h5 class="card-title" id="firebase-date-show"> firebase-date-show </h5>
+                            <h6 class="card-title" id="firebase-time-show"> firebase-time-show </h6>
+                            <p class="card-text" id="firebase-status-show"> firebase-status-show </p>
+                        </div>
+                    </div>
+                </div>
             </div>
             <!-- Content End -->
 

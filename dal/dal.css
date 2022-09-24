@@ -2,3 +2,8 @@
     font-size: 60px; 
     pointer-events: auto!important; 
 }
+
+.img_card{
+    height: 80px;
+    /* margin-top: 27px; */
+}
