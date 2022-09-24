@@ -2,7 +2,26 @@ var status_text;
 var adxl;
 var myData;
 var x;
+var myFirebase;
 var y;
+
+function get_time(t) {
+    var varTime = new Date(),
+        varHours = varTime.getHours(),
+        varMinutes = varTime.getMinutes(),
+        varSeconds = varTime.getSeconds();
+    var varNow;
+    if (t == "hms") {
+        varNow = varHours + ":" + varMinutes + ":" + varSeconds;
+    } else if (t == "h") {
+        varNow = varHours;
+    } else if (t == "m") {
+        varNow = varMinutes;
+    } else if (t == "s") {
+        varNow = varSeconds;
+    }
+    return varNow;
+}
 
 function get_date(t) {
     var varDay = new Date(),
@@ -26,24 +45,6 @@ function get_date(t) {
     return varNow;
 }
 
-function get_time(t) {
-    var varTime = new Date(),
-        varHours = varTime.getHours(),
-        varMinutes = varTime.getMinutes(),
-        varSeconds = varTime.getSeconds();
-    var varNow;
-    if (t == "hms") {
-        varNow = varHours + ":" + varMinutes + ":" + varSeconds;
-    } else if (t == "h") {
-        varNow = varHours;
-    } else if (t == "m") {
-        varNow = varMinutes;
-    } else if (t == "s") {
-        varNow = varSeconds;
-    }
-    return varNow;
-}
-
 function write() {
     if (x > 0.03) {
         myData.column0 = get_date("ymd");
@@ -52,28 +53,32 @@ function write() {
         myData.column3 = x;
         myData.column4 = status_text;
         writeSheetData(myData);
+        myFirebase.push({
+        date: get_date("ymd"),
+        time: get_time("hms"),
+        status: status_text
+        });
     }
     x = 0;
 }
 
 function status2() {
     if (x > 0.03) {
-        status_text = "someone in and out";
+        status_text = 'someone in and out';
     } else {
-        status_text = "";
+        status_text = '';
     }
 }
 
-boardReady(
-    { board: "Smart", device: "10QGMYby", transport: "mqtt" },
-    function (board) {
+
+boardReady({board: 'Smart', device: '10QGMYby', transport: 'mqtt'}, function (board) {
     board.samplingInterval = 1000;
-    status_text = "";
+    status_text = '';
     adxl = getADXL345(board);
-    myData = {};
-    myData.sheetUrl =
-        "https://docs.google.com/spreadsheets/d/1FwnrehFAzFVsYTk0mcMIqiEITqR6LWGKqeNQ4nH0jLc/edit?usp=sharing";
-    myData.sheetName = "DAL";
+    myData= {};
+    myData.sheetUrl = 'https://docs.google.com/spreadsheets/d/1FwnrehFAzFVsYTk0mcMIqiEITqR6LWGKqeNQ4nH0jLc/edit?usp=sharing';
+    myData.sheetName = 'DAL';
+    myFirebase = new Firebase('https://dal-smart-manufacturing-default-rtdb.firebaseio.com/door');
     x = 0;
     y = 0;
     adxl.setSensitivity = 0;
@@ -84,18 +89,12 @@ boardReady(
         adxl._z = _z;
         adxl._r = _r;
         adxl._p = _p;
-        x = Math.round(Math.abs(adxl._z - y) * 100000) / 100000;
-        document.getElementById("demo-area-01-show").innerHTML = [
-            get_time("hms"),("<br/>"),
-            x,
-            "<br/>",
-            String("status : ") + String(status_text),
-        ].join("");
+        x = (Math.round(((Math.abs(adxl._z - y)))*100000))/100000;
         status2();
+        document.getElementById('demo-area-01-show').innerHTML = ([get_time("hms"),("<br/>"),x,("<br/>"),String('status : ') + String(status_text)].join(''));
         y = adxl._z;
-        });
-        setInterval(function () {
+    });
+    setInterval(function () {
         write();
-        }, 1000 * 30);
-    }
-);
+    }, 1000 * 30);
+});
