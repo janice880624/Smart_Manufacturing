@@ -86,6 +86,7 @@ boardReady(
         adxl._p = _p;
         x = Math.round(Math.abs(adxl._z - y) * 100000) / 100000;
         document.getElementById("demo-area-01-show").innerHTML = [
+            get_time("hms"),("<br/>"),
             x,
             "<br/>",
             String("status : ") + String(status_text),
