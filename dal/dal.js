@@ -115,7 +115,7 @@ function get_date(t) {
 }
 
 function write() {
-    if (x > 0.03) {
+    if (x > 0.03 && x != 1) {
         myData.column0 = get_date("ymd");
         myData.column1 = get_time("hms");
         myData.column2 = adxl._z;
@@ -132,7 +132,7 @@ function write() {
 }
 
 function status2() {
-    if (x > 0.03) {
+    if (x > 0.03 && x != 1) {
         status_text = 'someone in and out';
     } else {
         status_text = '';
