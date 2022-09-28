@@ -65,73 +65,175 @@
             </nav>
         </div>
         <!-- Sidebar End -->
-
-
-        <!-- Content Start -->
         <div class="content">
-            <!-- Machine info Start -->
-            <div class="container-fluid pt-4 px-4">
-                <div class="col-12">
-                    <div class="bg-light rounded h-100 p-4">
-                        <div class="table-responsive">
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th scope="col"> Labs </th>
-                                        <th scope="col"> Equipment </th>
-                                        <th scope="col"> Admin </th>
-                                        <th scope="col"> Email </th>
-                                        <th scope="col"> Status </th>
-                                    </tr>
-                                </thead> 
-                                <tbody>
-                                    <tr>
-                                        <td> DAL </td>
-                                        <td> Door </td>
-                                        <td> Janice </td>
-                                        <td> janice@janice.tw</td>
-                                        <td> online </td>
-                                    </tr>
-                                    <tr>
-                                        <td> 洪維松老師 lab </td>
-                                        <td> 奈米過濾設備 </td>
-                                        <td> 黃琮翰 </td>
-                                        <td> xxxx@google.com</td>
-                                        <td> offline </td>
-                                    </tr>
-                                    <tr>
-                                        <td> 蕭育生教授 lab </td>
-                                        <td> CO2雷射設備 </td>
-                                        <td> Jacob 顏士傑  </td>
-                                        <td> xxxx@google.com</td>
-                                        <td> Verifying </td>
-                                    </tr>
-                                    <tr>
-                                        <td> 曾修暘老師 lab </td>
-                                        <td> spin coater </td>
-                                        <td> 陳曲蓁(Janet) </td>
-                                        <td> xxxx@google.com</td>
-                                        <td> Verifying </td>
-                                    </tr>
-                                    <tr>
-                                        <td> 郭俞麟主任 lab </td>
-                                        <td> 電漿自動化系統 </td>
-                                        <td> 咨光 </td>
-                                        <td> xxxx@google.com</td>
-                                        <td> offline </td>
-                                    </tr>
-
-                                </tbody>
-                            </table>
+            <div class="app-container">
+                <div class="app-content">
+                    <!-- searcg / filter -->
+                    <div class="app-content-actions">
+                        <input class="search-bar" placeholder="Search..." type="text">
+                        <div class="app-content-actions-wrapper">
+                            <div class="filter-button-wrapper">
+                                <button class="action-button filter jsFilter"><span> Filter </span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-filter"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
+                                </button>
+                            </div>
+                            <button class="action-button list active" title="List View">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-list"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+                            </button>
+                            <button class="action-button grid" title="Grid View">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-grid"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+                            </button>
                         </div>
+                    </div>
+
+                    
+                    <div class="products-area-wrapper tableView">
+                        <!-- title setting -->
+                        <div class="products-header">
+                            <div class="product-cell image"> 機台 <button class="sort-button">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"></svg>
+                                </button>
+                            </div>
+                            <div class="product-cell category"> 管理實驗室 <button class="sort-button">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"></svg>
+                                </button>
+                            </div>
+                            <div class="product-cell status-cell"> 機台連線狀態 <button class="sort-button">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"></svg>
+                                </button>
+                            </div>
+                            <div class="product-cell sales"> 負責學生 <button class="sort-button">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"></svg>
+                                </button>
+                            </div>
+                            <div class="product-cell stock"> 連絡電話 <button class="sort-button">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"></svg>
+                                </button>
+                            </div>
+                            <div class="product-cell price"> 聯絡信箱 <button class="sort-button">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"></svg>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- dal -->
+                        <div class="products-row">
+                            <button class="cell-more-button">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/></svg>
+                            </button>
+                                <div class="product-cell image">
+                                <img src="img/img_1.png" alt="product">
+                                <span> 人員進出管制 </span>
+                                </div>
+                            <div class="product-cell category"><span class="cell-label"> 管理實驗室: </span> 林柏廷老師 </div>
+                            <div class="product-cell status-cell">
+                                <span class="cell-label"> 機台連線狀態: </span>
+                                <span class="status active"> Active </span>
+                            </div>
+                            <div class="product-cell sales"><span class="cell-label"> 負責學生: </span> 郭尚蓁 </div>
+                            <div class="product-cell stock"><span class="cell-label"> 連絡電話: </span> 0931990604 </div>
+                            <div class="product-cell price"><span class="cell-label"> 聯絡信箱: </span> janice@janice.tw</div>
+                        </div>
+
+                        <!-- 洪維松老師 -->
+                        <div class="products-row">
+                            <button class="cell-more-button">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/></svg>
+                            </button>
+                                <div class="product-cell image">
+                                <img src="img/img_2.png" alt="product">
+                                <span> 奈米過濾設備 </span>
+                                </div>
+                            <div class="product-cell category"><span class="cell-label"> 管理實驗室: </span> 洪維松老師 </div>
+                            <div class="product-cell status-cell">
+                                <span class="cell-label"> 機台連線狀態: </span>
+                                <span class="status disabled"> Disabled </span>
+                            </div>
+                            <div class="product-cell sales"><span class="cell-label"> 負責學生: </span> 黃琮翰 </div>
+                            <div class="product-cell stock"><span class="cell-label"> 連絡電話: </span> 0123456789 </div>
+                            <div class="product-cell price"><span class="cell-label"> 聯絡信箱: </span> test@gmail.com</div>
+                        </div>
+
+                        <!-- 蕭育生教授 -->
+                        <div class="products-row">
+                            <button class="cell-more-button">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/></svg>
+                            </button>
+                                <div class="product-cell image">
+                                <img src="img/img_2.png" alt="product">
+                                <span> CO2雷射設備 </span>
+                                </div>
+                            <div class="product-cell category"><span class="cell-label"> 管理實驗室: </span> 蕭育生教授 </div>
+                            <div class="product-cell status-cell">
+                                <span class="cell-label"> 機台連線狀態: </span>
+                                <span class="status disabled"> Disabled </span>
+                            </div>
+                            <div class="product-cell sales"><span class="cell-label"> 負責學生: </span> 顏士傑 </div>
+                            <div class="product-cell stock"><span class="cell-label"> 連絡電話: </span> 0123456789 </div>
+                            <div class="product-cell price"><span class="cell-label"> 聯絡信箱: </span> test@gmail.com</div>
+                        </div>
+
+                        <!-- 曾修暘老師 -->
+                        <div class="products-row">
+                            <button class="cell-more-button">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/></svg>
+                            </button>
+                                <div class="product-cell image">
+                                <img src="img/img_2.png" alt="product">
+                                <span> 旋轉塗佈機 </span>
+                                </div>
+                            <div class="product-cell category"><span class="cell-label"> 管理實驗室: </span> 曾修暘老師 </div>
+                            <div class="product-cell status-cell">
+                                <span class="cell-label"> 機台連線狀態: </span>
+                                <span class="status disabled"> Disabled </span>
+                            </div>
+                            <div class="product-cell sales"><span class="cell-label"> 負責學生: </span> 陳曲蓁 </div>
+                            <div class="product-cell stock"><span class="cell-label"> 連絡電話: </span> 0123456789 </div>
+                            <div class="product-cell price"><span class="cell-label"> 聯絡信箱: </span> test@gmail.com</div>
+                        </div>
+
+                        <!-- 郭俞麟主任 -->
+                        <div class="products-row">
+                            <button class="cell-more-button">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/></svg>
+                            </button>
+                                <div class="product-cell image">
+                                <img src="img/img_2.png" alt="product">
+                                <span> 電漿自動化系統 </span>
+                                </div>
+                            <div class="product-cell category"><span class="cell-label"> 管理實驗室: </span> 郭俞麟主任 </div>
+                            <div class="product-cell status-cell">
+                                <span class="cell-label"> 機台連線狀態: </span>
+                                <span class="status disabled"> Disabled </span>
+                            </div>
+                            <div class="product-cell sales"><span class="cell-label"> 負責學生: </span> 咨光 </div>
+                            <div class="product-cell stock"><span class="cell-label"> 連絡電話: </span> 0123456789 </div>
+                            <div class="product-cell price"><span class="cell-label"> 聯絡信箱: </span> test@gmail.com</div>
+                        </div>
+
+                        <!-- 郭鴻飛所長 -->
+                        <div class="products-row">
+                            <button class="cell-more-button">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/></svg>
+                            </button>
+                                <div class="product-cell image">
+                                <img src="img/img_2.png" alt="product">
+                                <span> 半導體製程光學設備 </span>
+                                </div>
+                            <div class="product-cell category"><span class="cell-label"> 管理實驗室: </span> 郭鴻飛所長 </div>
+                            <div class="product-cell status-cell">
+                                <span class="cell-label"> 機台連線狀態: </span>
+                                <span class="status disabled"> Disabled </span>
+                            </div>
+                            <div class="product-cell sales"><span class="cell-label"> 負責學生: </span> xxxxx </div>
+                            <div class="product-cell stock"><span class="cell-label"> 連絡電話: </span> 0123456789 </div>
+                            <div class="product-cell price"><span class="cell-label"> 聯絡信箱: </span> test@gmail.com</div>
+                        </div>
+
                     </div>
                 </div>
             </div>
-            <!-- Machine info End -->
-
-
         </div>
-        <!-- Content End -->
 
 
         <!-- Back to Top -->
@@ -150,6 +252,7 @@
     <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
 
     <!-- Template Javascript -->
+    <script src="js/info.js"></script>
     <script src="js/main.js"></script>
 </body>
 
