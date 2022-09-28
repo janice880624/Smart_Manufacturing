@@ -739,12 +739,12 @@
 }
 
 .status.disabled {
-    color: #59719d;
-    background-color: rgba(89, 113, 157, 0.2);
+    color: #FF3030;
+    background-color: rgba(233, 122, 127, 0.2);
 }
 
 .status.disabled:before {
-    background-color: #59719d;
+    background-color: #FF3030;
 }
 
 .gridView {
@@ -772,6 +772,7 @@
     cursor: pointer;
     transition: transform 0.2s;
     position: relative;
+    background-color:#FAFAFA	;
 }
 
 .gridView .products-row:hover {
