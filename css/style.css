@@ -665,28 +665,33 @@
 
 @media screen and (max-width: 520px) {
 
-    .tableView .product-cell.category,
-    .tableView .product-cell.sales {
+    .tableView .product-cell.phone,
+    .tableView .product-cell.email{
         display: none;
     }
 
     .tableView .product-cell.status-cell {
-        flex: 0.4;
+        flex: 0.3;
     }
 
-    .tableView .product-cell.stock,
-    .tableView .product-cell.price {
-        flex: 0.2;
+    .tableView .product-cell.category,
+    .tableView .product-cell.student {
+        flex: 0.3;
     }
 }
 
 @media screen and (max-width: 480px) {
-    .tableView .product-cell.stock {
+    .tableView .product-cell.phone {
         display: none;
     }
 
-    .tableView .product-cell.price {
-        flex: 0.4;
+    .tableView .product-cell.status-cell {
+        flex: 0.3;
+    }
+
+    .tableView .product-cell.category,
+    .tableView .product-cell.student {
+        flex: 0.2;
     }
 }
 
