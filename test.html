@@ -1,64 +1,49 @@
-        <!-- Content Start -->
-        <div class="content">
-            <!-- Machine info Start -->
-            <div class="container-fluid pt-4 px-4">
-                <div class="col-12">
-                    <div class="bg-light rounded h-100 p-4">
-                        <div class="table-responsive">
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th scope="col"> Labs </th>
-                                        <th scope="col"> Equipment </th>
-                                        <th scope="col"> Admin </th>
-                                        <th scope="col"> Email </th>
-                                        <th scope="col"> Status </th>
-                                    </tr>
-                                </thead> 
-                                <tbody>
-                                    <tr>
-                                        <td> DAL </td>
-                                        <td> Door </td>
-                                        <td> Janice </td>
-                                        <td> janice@janice.tw</td>
-                                        <td> online </td>
-                                    </tr>
-                                    <tr>
-                                        <td> 洪維松老師 lab </td>
-                                        <td> 奈米過濾設備 </td>
-                                        <td> 黃琮翰 </td>
-                                        <td> xxxx@google.com</td>
-                                        <td> offline </td>
-                                    </tr>
-                                    <tr>
-                                        <td> 蕭育生教授 lab </td>
-                                        <td> CO2雷射設備 </td>
-                                        <td> Jacob 顏士傑  </td>
-                                        <td> xxxx@google.com</td>
-                                        <td> Verifying </td>
-                                    </tr>
-                                    <tr>
-                                        <td> 曾修暘老師 lab </td>
-                                        <td> spin coater </td>
-                                        <td> 陳曲蓁(Janet) </td>
-                                        <td> xxxx@google.com</td>
-                                        <td> Verifying </td>
-                                    </tr>
-                                    <tr>
-                                        <td> 郭俞麟主任 lab </td>
-                                        <td> 電漿自動化系統 </td>
-                                        <td> 咨光 </td>
-                                        <td> xxxx@google.com</td>
-                                        <td> offline </td>
-                                    </tr>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title> 裝置狀態查詢 </title>
+    <script src="/components/webduino-js/dist/webduino-base.min.js"></script>
+</head>
+    <body>
+    <h1> 裝置狀態查詢 </h1>
+    <hr>
+    <p id="status">⏳ 正在等候 device_id 回應... <br></p>
+    <script>
+        (function () {
+        var BoardEvent = webduino.BoardEvent;
+        var board = new webduino.WebArduino({
+            device: '10QGMYby',
+            initialReset: false,
+            handleDigitalPins: false,
+            multi: true
+        });
+        var p = document.getElementById('status');
+        var warning = setTimeout(function () {
+            return setStatus('🧐 連線逾時，請確認 ID 是否無誤，或網路連線是否正常<br>');
+        }, 5000);
 
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Machine info End -->
+        board.on(BoardEvent.READY, function() {
+            setStatus('👍 連線成功<br>');
+            clearTimeout(warning);
+            setTimeout(function() {
+            board.send([0xF0, 0x0E, 0x07, 0xF7]);
+            }, 0);
+        });
+        board.on(BoardEvent.ERROR, function() {
+            setStatus('😱 連線發生錯誤<br>');
+        });
+        board.on(webduino.BoardEvent.STRING_MESSAGE,
+            function(event) {
+            var version = event.message.split(',')[0];
+            var state = "✅ 查詢版本成功<br>✨ 目前版本： " + version + "<br>";
+            setStatus(state);
+            });
 
-        </div>
-        <!-- Content End -->
+        function setStatus(st) {
+            p.innerHTML += st;
+        }
+        })();
+    </script>
+    </body>
+</html>
