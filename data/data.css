@@ -1,0 +1,10 @@
+html, body{
+    padding: 0;
+    margin: 0;
+}
+#myChart{
+    margin: auto;
+    margin-top: 50px;
+    /* background: #f9e498; */
+    display: block;
+}
