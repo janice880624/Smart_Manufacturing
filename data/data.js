@@ -31,7 +31,7 @@ var chart = new Chart(ctx, {
     data: {
         labels: data.map(x=>x.Time.slice(11,16)),
         datasets: [{
-            label: '交通量',
+            label: '震動訊號',
             data: data.map(x=>x.Volume),
             // Line
             lineTension: 0,
