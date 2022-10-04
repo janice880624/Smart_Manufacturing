@@ -35,6 +35,7 @@ $(document).ready(function() {
             }
         }
     };
+
     var title = {
         text: '機台震動情況'   
     };  
@@ -104,6 +105,7 @@ $(document).ready(function() {
         
     var json = {};   
     json.chart = chart; 
+    json.credits = credits; 
     json.title = title;     
     json.tooltip = tooltip;
     json.xAxis = xAxis;
