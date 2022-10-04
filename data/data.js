@@ -1,3 +1,4 @@
+// DAL 門震動訊號
 let y_value = 0;
 let url = "https://script.google.com/macros/s/AKfycbxg7-ZyPi1iudEVDJ7gqQIvOmXALMHeMhiUh1XyRHLHnceQh7rWd5C7SUnJSMcIK8JO7w/exec";
 
@@ -35,15 +36,22 @@ $(document).ready(function() {
         }
     };
     var title = {
-        text: 'Live random data'   
-    };   
+        text: '機台震動情況'   
+    };  
+
+    var credits={
+        enabled = false;
+    }
+    
+
+
     var xAxis = {
         type: 'datetime',
         tickPixelInterval: 150
     };
     var yAxis = {
         title: {
-            text: 'Value'
+            text: 'Z 軸數值'
         },
         plotLines: [{
             value: 0,
@@ -111,7 +119,7 @@ $(document).ready(function() {
             useUTC: false
         }
     });
-    
+
     $('#container').highcharts(json);
     
 });
