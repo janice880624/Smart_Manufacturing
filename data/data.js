@@ -111,6 +111,7 @@ $(document).ready(function() {
             useUTC: false
         }
     });
+    
     $('#container').highcharts(json);
     
 });
