@@ -1,61 +1,116 @@
-var data = [
-    {"Time": "2020–09–01 00:00", "Volume": 1523},
-    {"Time": "2020–09–01 01:00", "Volume": 1010},
-    {"Time": "2020–09–01 02:00", "Volume": 1304},
-    {"Time": "2020–09–01 03:00", "Volume": 1106},
-    {"Time": "2020–09–01 04:00", "Volume": 1312},
-    {"Time": "2020–09–01 05:00", "Volume": 1017},
-    {"Time": "2020–09–01 06:00", "Volume": 1066},
-    {"Time": "2020–09–01 07:00", "Volume": 1475},
-    {"Time": "2020–09–01 08:00", "Volume": 1270},
-    {"Time": "2020–09–01 09:00", "Volume": 1496},
-    {"Time": "2020–09–01 10:00", "Volume": 1712},
-    {"Time": "2020–09–01 11:00", "Volume": 1068},
-    {"Time": "2020–09–01 12:00", "Volume": 1018},
-    {"Time": "2020–09–01 13:00", "Volume": 1283},
-    {"Time": "2020–09–01 14:00", "Volume": 1659},
-    {"Time": "2020–09–01 15:00", "Volume": 1050},
-    {"Time": "2020–09–01 16:00", "Volume": 1200},
-    {"Time": "2020–09–01 17:00", "Volume": 1138},
-    {"Time": "2020–09–01 18:00", "Volume": 1386},
-    {"Time": "2020–09–01 19:00", "Volume": 1041},
-    {"Time": "2020–09–01 20:00", "Volume": 1734},
-    {"Time": "2020–09–01 21:00", "Volume": 1372},
-    {"Time": "2020–09–01 22:00", "Volume": 1270},
-    {"Time": "2020–09–01 23:00", "Volume": 1207}];
+let y_value = 0;
+let url = "https://script.google.com/macros/s/AKfycbxg7-ZyPi1iudEVDJ7gqQIvOmXALMHeMhiUh1XyRHLHnceQh7rWd5C7SUnJSMcIK8JO7w/exec";
 
-var ctx = document.getElementById('myChart').getContext('2d');
+function makeRequest() {
+    xhr = new XMLHttpRequest();
+    xhr.onload = function() {
+        let response = JSON.parse(this.response);
+        y_value = response
+        console.log(response)
+    };
+    xhr.open("GET", url, true);
 
-var chart = new Chart(ctx, {
-    type: 'line',
-    data: {
-        labels: data.map(x=>x.Time.slice(11,16)),
-        datasets: [{
-            label: '震動訊號',
-            data: data.map(x=>x.Volume),
-            // Line
-            lineTension: 0,
-            backgroundColor: '#0000D6',
-            borderColor: '#6363FF',
-            fill: false,
-            borderWidth: 2,
-            // Point
-            pointRadius: 5,
-            pointHoverRadius: 7,
+    xhr.send();
+}
+makeRequest();
+
+setInterval(function () {
+    makeRequest();
+}, 1000);
+
+$(document).ready(function() {  
+    var chart = {
+        type: 'spline',
+        animation: Highcharts.svg,
+        marginRight: 10,
+        events: {
+            load: function () {
+                var series = this.series[0];
+                setInterval(function () {
+                var x = (new Date()).getTime(), 
+                y = y_value;
+                series.addPoint([x, y], true, true);
+                }, 1000);
+            }
+        }
+    };
+    var title = {
+        text: 'Live random data'   
+    };   
+    var xAxis = {
+        type: 'datetime',
+        tickPixelInterval: 150
+    };
+    var yAxis = {
+        title: {
+            text: 'Value'
+        },
+        plotLines: [{
+            value: 0,
+            width: 1,
+            color: '#808080'
         }]
-    },
-    options:{
-        title:{
-            display: true,
-            text: '震動訊號',
-            position: 'bottom',
-            fontSize: 24,
-            fontStyle: 'normal',
-            fontFamily: 'Century Gothic'
-        },
-        legend:{
-            display: false
-        },
-        responsive: false
-    }
+    };
+    var tooltip = {
+        formatter: function () {
+        return '<b>' + this.series.name + '</b><br/>' +
+            Highcharts.dateFormat('%Y-%m-%d %H:%M:%S', this.x) + '<br/>' +
+            Highcharts.numberFormat(this.y, 2);
+        }
+    };
+    var plotOptions = {
+        area: {
+            pointStart: 1940,
+            marker: {
+                enabled: false,
+                symbol: 'circle',
+                radius: 2,
+                states: {
+                hover: {
+                    enabled: true
+                }
+                }
+            }
+        }
+    };
+    var legend = {
+        enabled: false
+    };
+    var exporting = {
+        enabled: false
+    };
+    var series= [{
+        name: 'Random data',
+        data: (function () {
+            // generate an array of random data
+            var data = [],time = (new Date()).getTime(),i;
+            for (i = -19; i <= 0; i += 1) {
+                data.push({
+                    x: time + i * 2000,
+                    y: Math.random(0, 1.5)
+                });
+            }
+            return data;
+        }())    
+    }];     
+        
+    var json = {};   
+    json.chart = chart; 
+    json.title = title;     
+    json.tooltip = tooltip;
+    json.xAxis = xAxis;
+    json.yAxis = yAxis; 
+    json.legend = legend;  
+    json.exporting = exporting;   
+    json.series = series;
+    json.plotOptions = plotOptions;
+    
+    
+    Highcharts.setOptions({
+        global: {
+            useUTC: false
+        }
+    });
+    $('#container').highcharts(json);
+    
 });
