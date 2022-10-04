@@ -40,7 +40,7 @@ $(document).ready(function() {
     };  
 
     var credits={
-        enabled = false;
+        enabled: false
     }
     
 
