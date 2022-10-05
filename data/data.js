@@ -37,7 +37,7 @@ $(document).ready(function() {
     };
 
     var title = {
-        text: '機台震動情況'   
+        text: 'DAL 人員進出情況'   
     };  
 
     var credits={
