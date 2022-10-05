@@ -63,3 +63,9 @@ pm10_Firebase.limitToLast(1).on('child_added', function (snapshot) {
     document.getElementById('firebase-pm10-show').innerHTML = val_7;
     status_f = val_7;
 });
+
+function adjustIframe(){
+    var ifm = document.getElementById("value_iframe");
+    ifm.height = document.documentElement.clientHeight;
+    ifm.width = document.documentElement.clientWidth;
+}
