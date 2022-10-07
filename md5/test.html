@@ -64,6 +64,7 @@ Released under the MIT license: http://jsbin.mit-license.org
     setInterval(function () {
       myFirebase = new Firebase('https://test-project-97787-default-rtdb.firebaseio.com/test');
       aaa = ((math_random_int(100, 200) / 100) + "");
+      
       message = aaa.toString();
       encrypt = CryptoJS.AES.encrypt(message, CryptoJS.enc.Utf8.parse(aseKey), {
         mode: CryptoJS.mode.ECB,
