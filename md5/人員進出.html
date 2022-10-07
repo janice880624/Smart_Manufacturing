@@ -135,12 +135,19 @@
             post.column0 = get_date("ymd");
             post.column1 = get_time("hms");
             post.column2 = adxl._z;
-
             writeSheetData(post);
+
+            message = aaa.toString();
+            encrypt = CryptoJS.AES.encrypt(message, CryptoJS.enc.Utf8.parse(aseKey), {
+              mode: CryptoJS.mode.ECB,
+              padding: CryptoJS.pad.Pkcs7
+            }).toString();
+            console.log(encrypt);
+
             myFirebase2.push({
               date: get_date("ymd"),
               time: get_time("hms"),
-              valus: adxl._z
+              valus: encrypt,
             });
           }
           y = adxl._z;
