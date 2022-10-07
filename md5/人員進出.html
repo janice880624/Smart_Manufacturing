@@ -2,154 +2,155 @@
 <meta name="robots" content="noindex">
 <html>
 
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-  <title> 人員進出 </title>
-  <script type="text/ecmascript" src="md5.js"></script>
-  <script src="https://blocklypro.webduino.io/node_modules/jquery/dist/jquery.min.js?rev=2f6b11a7e914718e0290410e85366fe9"></script>
-  <script src="https://blocklypro.webduino.io/dist/lib/webduino-all-0.4.20.min.js?rev=4426739c00d85325cb2d3d701fa50666"></script>
-  <script src="https://blocklypro.webduino.io/dist/webduino-blockly.min.js?rev=6e074ceb23d12d1f7cf2ec95cd5a4150"></script>
-  <script src="https://blocklypro.webduino.io/dist/lib/firebase.min.js?rev=c0bfd493efd477d098a4ae9e92b13880"></script>
-  <script src="https://blocklypro.webduino.io/dist/lib/runtime.min.js?rev=683a69503433786202911b4d9f766100"></script>
-  <style id="jsbin-css">
-    #demo-area-01-show { font-size: 60px; pointer-events: auto!important; }
-  </style>
-</head>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title> 人員進出 </title>
+    <script type="text/ecmascript" src="md5.js"></script>
+    <script src="https://blocklypro.webduino.io/node_modules/jquery/dist/jquery.min.js?rev=2f6b11a7e914718e0290410e85366fe9"></script>
+    <script src="https://blocklypro.webduino.io/dist/lib/webduino-all-0.4.20.min.js?rev=4426739c00d85325cb2d3d701fa50666"></script>
+    <script src="https://blocklypro.webduino.io/dist/webduino-blockly.min.js?rev=6e074ceb23d12d1f7cf2ec95cd5a4150"></script>
+    <script src="https://blocklypro.webduino.io/dist/lib/firebase.min.js?rev=c0bfd493efd477d098a4ae9e92b13880"></script>
+    <script src="https://blocklypro.webduino.io/dist/lib/runtime.min.js?rev=683a69503433786202911b4d9f766100"></script>
+    <style id="jsbin-css">
+      #demo-area-01-show { font-size: 60px; pointer-events: auto!important; }
+    </style>
+  </head>
 
-<body>
-  <div><span id="demo-area-01-show">123</span></div>
-  <script id="jsbin-javascript">
-    var status_text;
-    var adxl;
-    var myData;
-    var x;
-    var myFirebase;
-    var post;
-    var myFirebase2;
-    var y;
+  <body>
+    <div><span id="demo-area-01-show">123</span></div>
+    <script id="jsbin-javascript">
+      var status_text;
+      var adxl;
+      var myData;
+      var x;
+      var myFirebase;
+      var post;
+      var myFirebase2;
+      var y;
 
-    var aseKey = "39398890"
-    var message = "";
-    var encrypt = "";
+      var aseKey = "39398890"
+      var message = "";
+      var encrypt = "";
 
-    function get_time(t) {
-      var varTime = new Date(),
-        varHours = varTime.getHours(),
-        varMinutes = varTime.getMinutes(),
-        varSeconds = varTime.getSeconds();
-      var varNow;
-      if (t == "hms") {
-        varNow = varHours + ":" + varMinutes + ":" + varSeconds;
-      } else if (t == "h") {
-        varNow = varHours;
-      } else if (t == "m") {
-        varNow = varMinutes;
-      } else if (t == "s") {
-        varNow = varSeconds;
+      function get_time(t) {
+        var varTime = new Date(),
+          varHours = varTime.getHours(),
+          varMinutes = varTime.getMinutes(),
+          varSeconds = varTime.getSeconds();
+        var varNow;
+        if (t == "hms") {
+          varNow = varHours + ":" + varMinutes + ":" + varSeconds;
+        } else if (t == "h") {
+          varNow = varHours;
+        } else if (t == "m") {
+          varNow = varMinutes;
+        } else if (t == "s") {
+          varNow = varSeconds;
+        }
+        return varNow;
       }
-      return varNow;
-    }
 
-    function get_date(t) {
-      var varDay = new Date(),
-        varYear = varDay.getFullYear(),
-        varMonth = varDay.getMonth() + 1,
-        varDate = varDay.getDate();
-      var varNow;
-      if (t == "ymd") {
-        varNow = varYear + "/" + varMonth + "/" + varDate;
-      } else if (t == "mdy") {
-        varNow = varMonth + "/" + varDate + "/" + varYear;
-      } else if (t == "dmy") {
-        varNow = varDate + "/" + varMonth + "/" + varYear;
-      } else if (t == "y") {
-        varNow = varYear;
-      } else if (t == "m") {
-        varNow = varMonth;
-      } else if (t == "d") {
-        varNow = varDate;
+      function get_date(t) {
+        var varDay = new Date(),
+          varYear = varDay.getFullYear(),
+          varMonth = varDay.getMonth() + 1,
+          varDate = varDay.getDate();
+        var varNow;
+        if (t == "ymd") {
+          varNow = varYear + "/" + varMonth + "/" + varDate;
+        } else if (t == "mdy") {
+          varNow = varMonth + "/" + varDate + "/" + varYear;
+        } else if (t == "dmy") {
+          varNow = varDate + "/" + varMonth + "/" + varYear;
+        } else if (t == "y") {
+          varNow = varYear;
+        } else if (t == "m") {
+          varNow = varMonth;
+        } else if (t == "d") {
+          varNow = varDate;
+        }
+        return varNow;
       }
-      return varNow;
-    }
 
-    function status2() {
-      if (x > 0.03 && x != 1) {
-        status_text = 'someone in and out';
-      } else {
-        status_text = '';
+      function status2() {
+        if (x > 0.03 && x != 1) {
+          status_text = 'someone in and out';
+        } else {
+          status_text = '';
+        }
       }
-    }
 
-    function write() {
-      if (x > 0.03 && x != 1) {
-        myData.column0 = get_date("ymd");
-        myData.column1 = get_time("hms");
-        myData.column2 = adxl._z;
-        myData.column3 = x;
-        myData.column4 = status_text;
-        writeSheetData(myData);
-        myFirebase.push({
-          date: get_date("ymd"),
-          time: get_time("hms"),
-          valus: x,
-          status: status_text
-        });
-      }
-      x = 0;
-    }
-
-    boardReady({board: 'Smart', device: '10QGMYby', transport: 'mqtt'}, function (board) {
-      board.samplingInterval = 500;
-      status_text = '';
-      adxl = getADXL345(board);
-
-      myData= {};
-      myData.sheetUrl = 'https://docs.google.com/spreadsheets/d/1FwnrehFAzFVsYTk0mcMIqiEITqR6LWGKqeNQ4nH0jLc/edit?usp=sharing';
-      myData.sheetName = 'DAL';
-
-      post= {};
-      post.sheetUrl = 'https://docs.google.com/spreadsheets/d/1FwnrehFAzFVsYTk0mcMIqiEITqR6LWGKqeNQ4nH0jLc/edit?usp=sharing';
-      post.sheetName = 'value';
-
-      myFirebase = new Firebase('https://dal-smart-manufacturing-default-rtdb.firebaseio.com/door');
-      myFirebase2 = new Firebase('https://test-project-97787-default-rtdb.firebaseio.com/DAL');
-
-      x = 0;
-      y = 0;
-      adxl.setSensitivity = 0;
-      adxl.setBaseAxis = "x";
-      adxl.detect(function (_x, _y, _z, _r, _p) {
-        adxl._x = _x;
-        adxl._y = _y;
-        adxl._z = _z;
-        adxl._r = _r;
-        adxl._p = _p;
-        aaa = adxl._z;
-        x = (Math.round(((Math.abs(adxl._z - y)))*100000))/100000;
-        status2();
-        document.getElementById('demo-area-01-show').innerHTML = ([get_time("hms"), ("<br/>"), x, ("<br/>"), adxl._z, ("<br/>"), String('status : ') + String(status_text)].join(''));
-
-        if (adxl._z != null) {         
-
-          post.column0 = get_date("ymd");
-          post.column1 = get_time("hms");
-          post.column2 = adxl._z;
-
-          writeSheetData(post);
-          myFirebase2.push({
+      function write() {
+        if (x > 0.03 && x != 1) {
+          myData.column0 = get_date("ymd");
+          myData.column1 = get_time("hms");
+          myData.column2 = adxl._z;
+          myData.column3 = x;
+          myData.column4 = status_text;
+          writeSheetData(myData);
+          myFirebase.push({
             date: get_date("ymd"),
             time: get_time("hms"),
-            valus: adxl._z
+            valus: x,
+            status: status_text
           });
         }
-        y = adxl._z;
-      });
-      
-      setInterval(function () {
-        write();
-      }, 1000 * 30);
-    });
+        x = 0;
+      }
 
-  </script>
-</body>
+      boardReady({board: 'Smart', device: '10QGMYby', transport: 'mqtt'}, function (board) {
+        board.samplingInterval = 500;
+        status_text = '';
+        adxl = getADXL345(board);
+
+        myData = {};
+        myData.sheetUrl = 'https://docs.google.com/spreadsheets/d/1FwnrehFAzFVsYTk0mcMIqiEITqR6LWGKqeNQ4nH0jLc/edit?usp=sharing';
+        myData.sheetName = 'DAL';
+
+        post = {};
+        post.sheetUrl = 'https://docs.google.com/spreadsheets/d/1FwnrehFAzFVsYTk0mcMIqiEITqR6LWGKqeNQ4nH0jLc/edit?usp=sharing';
+        post.sheetName = 'value';
+
+        myFirebase = new Firebase('https://dal-smart-manufacturing-default-rtdb.firebaseio.com/door');
+        myFirebase2 = new Firebase('https://test-project-97787-default-rtdb.firebaseio.com/DAL');
+
+        x = 0;
+        y = 0;
+        adxl.setSensitivity = 0;
+        adxl.setBaseAxis = "x";
+        adxl.detect(function (_x, _y, _z, _r, _p) {
+          adxl._x = _x;
+          adxl._y = _y;
+          adxl._z = _z;
+          adxl._r = _r;
+          adxl._p = _p;
+          aaa = adxl._z;
+          x = (Math.round(((Math.abs(adxl._z - y)))*100000))/100000;
+          status2();
+          document.getElementById('demo-area-01-show').innerHTML = ([get_time("hms"), ("<br/>"), x, ("<br/>"), adxl._z, ("<br/>"), String('status : ') + String(status_text)].join(''));
+
+          if (adxl._z != null) {         
+
+            post.column0 = get_date("ymd");
+            post.column1 = get_time("hms");
+            post.column2 = adxl._z;
+
+            writeSheetData(post);
+            myFirebase2.push({
+              date: get_date("ymd"),
+              time: get_time("hms"),
+              valus: adxl._z
+            });
+          }
+          y = adxl._z;
+        });
+
+        setInterval(function () {
+          write();
+        }, 1000 * 30);
+      });
+
+    </script>
+  </body>
+</html>
