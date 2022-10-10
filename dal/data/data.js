@@ -3,24 +3,6 @@ var y_value = 0;
 var myFirebase;
 var date;
 var val_1;
-// let url = "https://script.google.com/macros/s/AKfycbxg7-ZyPi1iudEVDJ7gqQIvOmXALMHeMhiUh1XyRHLHnceQh7rWd5C7SUnJSMcIK8JO7w/exec";
-
-// function makeRequest() {
-//     xhr = new XMLHttpRequest();
-//     xhr.onload = function() {
-//         let response = JSON.parse(this.response);
-//         y_value = response
-//         console.log(response)
-//     };
-//     xhr.open("GET", url, true);
-
-//     xhr.send();
-// }
-// makeRequest();
-
-// setInterval(function () {
-//     makeRequest();
-// }, 1000);
 
 myFirebase = new Firebase('https://test-project-97787-default-rtdb.firebaseio.com/DAL');
 myFirebase.limitToLast(1).on('child_added', function (snapshot) {
