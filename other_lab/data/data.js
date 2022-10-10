@@ -1,23 +1,28 @@
-// DAL 門震動訊號
+// 震動訊號
+
 let y_value = 0;
-let url = "API 連結放這";
+var firebaseConfig = {
+    apiKey: "AIzaSyCWWeW13rvGx7_zPpm8E9-SpQMaW8OsVs0",
+    authDomain: "test-project-97787.firebaseapp.com",
+    databaseURL: "https://test-project-97787-default-rtdb.firebaseio.com",
+    projectId: "test-project-97787",
+    storageBucket: "test-project-97787.appspot.com",
+    messagingSenderId: "779357488250",
+    appId: "1:779357488250:web:e626239795aa6054b5e7c3",
+    measurementId: "G-84NJGP3BPD"
+};
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
 
-function makeRequest() {
-    xhr = new XMLHttpRequest();
-    xhr.onload = function() {
-        let response = JSON.parse(this.response);
-        y_value = response
-        console.log(response)
-    };
-    xhr.open("GET", url, true);
+var database = firebase.database();
+console.log(database);
 
-    xhr.send();
-}
-makeRequest();
+onValue(dbRef, snapshot => {
+    console.log(snapshot.val());
+});
 
-setInterval(function () {
-    makeRequest();
-}, 1000);
+
+
 
 $(document).ready(function() {  
     var chart = {
