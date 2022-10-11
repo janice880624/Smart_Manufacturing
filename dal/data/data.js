@@ -9,16 +9,7 @@ myFirebase = new Firebase('https://test-project-97787-default-rtdb.firebaseio.co
 myFirebase.limitToLast(1).on('child_added', function (snapshot) {
     val_1 = snapshot.val().valus;
     console.log("val_1 => ", val_1);
-    // console.log(typeof(val_1));
     console.log("type of val_1 =>", typeof(val_1));
-
-
-    // var decrypt = CryptoJS.AES.decrypt(val_1, aseKey);
-    // console.log(decrypt.toString(CryptoJS.enc.Utf8));
-
-    // var encrypt2 = "/NL2NyA8rVmoVQn1wRK+WA==";
-    // console.log("encrypt2  => ", encrypt2 );
-    // console.log("type of encrypt2 =>", typeof(encrypt2));
 
     var decrypt = CryptoJS.AES.decrypt(val_1, CryptoJS.enc.Utf8.parse(aseKey), {
         mode: CryptoJS.mode.ECB,
@@ -31,12 +22,6 @@ myFirebase.limitToLast(1).on('child_added', function (snapshot) {
     console.log(y_value);
     console.log(typeof(y_value));
 });
-
-// setInterval(function () {
-
-
-// }, 1000);
-
 
 
 $(document).ready(function() {  
@@ -64,7 +49,6 @@ $(document).ready(function() {
         enabled: false
     };
     
-
 
     var xAxis = {
         type: 'datetime',
