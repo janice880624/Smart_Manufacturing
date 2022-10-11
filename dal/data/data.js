@@ -1,7 +1,6 @@
 // DAL 門震動訊號
 var y_value = 0;
 var myFirebase;
-var date;
 var val_1 = "";
 var aseKey = "39398890";
 
