@@ -5,18 +5,10 @@ var myFirebase2;
 var val_1;
 var val_2;
 var val_3;
-var val_4;
-var val_5;
-var val_6;
-var val_7;
 var tem;
 var hum;
 var pm25;
 var pm10;
-var tem_Firebase;
-var hum_Firebase;
-var pm25_Firebase;
-var pm10_Firebase;
 
 date = '';
 myFirebase2 = new Firebase('https://dal-smart-manufacturing-default-rtdb.firebaseio.com/microheat');
