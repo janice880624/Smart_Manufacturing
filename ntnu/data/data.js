@@ -1,27 +1,26 @@
-// 震動訊號
+// DAL 門震動訊號
+var y_value = 0;
+var myFirebase;
+var val_1 = "";
+var aseKey = "39398890";
 
-let y_value = 0;
-var firebaseConfig = {
-    apiKey: "AIzaSyCWWeW13rvGx7_zPpm8E9-SpQMaW8OsVs0",
-    authDomain: "test-project-97787.firebaseapp.com",
-    databaseURL: "https://test-project-97787-default-rtdb.firebaseio.com",
-    projectId: "test-project-97787",
-    storageBucket: "test-project-97787.appspot.com",
-    messagingSenderId: "779357488250",
-    appId: "1:779357488250:web:e626239795aa6054b5e7c3",
-    measurementId: "G-84NJGP3BPD"
-};
-// Initialize Firebase
-firebase.initializeApp(firebaseConfig);
+myFirebase = new Firebase('https://test-project-97787-default-rtdb.firebaseio.com/ntnu');
+myFirebase.limitToLast(1).on('child_added', function (snapshot) {
+    val_1 = snapshot.val().valus;
+    console.log("val_1 => ", val_1);
+    console.log("type of val_1 =>", typeof(val_1));
 
-var database = firebase.database();
-console.log(database);
-
-onValue(dbRef, snapshot => {
-    console.log(snapshot.val());
+    var decrypt = CryptoJS.AES.decrypt(val_1, CryptoJS.enc.Utf8.parse(aseKey), {
+        mode: CryptoJS.mode.ECB,
+        padding: CryptoJS.pad.Pkcs7
+    }).toString(CryptoJS.enc.Utf8);
+    console.log("decrypt => ", decrypt);
+    
+    
+    y_value = Number(decrypt);
+    console.log(y_value);
+    console.log(typeof(y_value));
 });
-
-
 
 
 $(document).ready(function() {  
@@ -49,7 +48,6 @@ $(document).ready(function() {
         enabled: false
     };
     
-
 
     var xAxis = {
         type: 'datetime',
