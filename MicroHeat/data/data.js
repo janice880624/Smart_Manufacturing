@@ -1,14 +1,24 @@
 // DAL 門震動訊號
 var y_value = 0;
 var myFirebase;
-var date;
-var val_1;
+var val_1 = "";
+var aseKey = "39398890";
 
-myFirebase = new Firebase('https://test-project-97787-default-rtdb.firebaseio.com/PILAB');
+myFirebase = new Firebase('https://test-project-97787-default-rtdb.firebaseio.com/microheat');
 myFirebase.limitToLast(1).on('child_added', function (snapshot) {
     val_1 = snapshot.val().valus;
-    y_value = Number(val_1);
-    console.log(val_1);
+    console.log("val_1 => ", val_1);
+    console.log("type of val_1 =>", typeof(val_1));
+
+    var decrypt = CryptoJS.AES.decrypt(val_1, CryptoJS.enc.Utf8.parse(aseKey), {
+        mode: CryptoJS.mode.ECB,
+        padding: CryptoJS.pad.Pkcs7
+    }).toString(CryptoJS.enc.Utf8);
+    console.log("decrypt => ", decrypt);
+    
+    
+    y_value = Number(decrypt);
+    console.log(y_value);
     console.log(typeof(y_value));
 });
 
@@ -30,7 +40,7 @@ $(document).ready(function() {
     };
 
     var title = {
-        text: 'PI LAB 機台震動狀態'   
+        text: '微熱流機電實驗室'   
     };  
 
     var credits={
