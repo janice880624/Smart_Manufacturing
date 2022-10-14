@@ -2,7 +2,7 @@
 var y_value = 0;
 var myFirebase;
 var val_1 = "";
-var aseKey = "39398890";
+// var aseKey = "39398890";
 
 myFirebase = new Firebase('https://test-project-97787-default-rtdb.firebaseio.com/microheat');
 myFirebase.limitToLast(1).on('child_added', function (snapshot) {
