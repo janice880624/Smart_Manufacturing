@@ -7,7 +7,7 @@ var val_2;
 var val_3;
 
 date = '';
-myFirebase2 = new Firebase('https://dal-smart-manufacturing-default-rtdb.firebaseio.com/PILAB');
+myFirebase2 = new Firebase('https://dal-smart-manufacturing-default-rtdb.firebaseio.com/AOPDLab');
 myFirebase2.limitToLast(1).on('child_added', function (snapshot) {
     val_1 = snapshot.val().date;
     document.getElementById('firebase-date-show').innerHTML = val_1;

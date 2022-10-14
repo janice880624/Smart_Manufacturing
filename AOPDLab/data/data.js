@@ -4,7 +4,7 @@ var myFirebase;
 var date;
 var val_1;
 
-myFirebase = new Firebase('https://test-project-97787-default-rtdb.firebaseio.com/PILAB');
+myFirebase = new Firebase('https://test-project-97787-default-rtdb.firebaseio.com/AOPDLab');
 myFirebase.limitToLast(1).on('child_added', function (snapshot) {
     val_1 = snapshot.val().valus;
     y_value = Number(val_1);
