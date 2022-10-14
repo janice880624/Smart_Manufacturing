@@ -30,7 +30,7 @@ $(document).ready(function() {
     };
 
     var title = {
-        text: 'PI LAB 機台震動狀態'   
+        text: 'AOPDLab 機台震動狀態'   
     };  
 
     var credits={

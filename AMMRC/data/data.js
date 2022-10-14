@@ -30,7 +30,7 @@ $(document).ready(function() {
     };
 
     var title = {
-        text: 'PI LAB 機台震動狀態'   
+        text: 'AMMRC 機台震動狀態'   
     };  
 
     var credits={
