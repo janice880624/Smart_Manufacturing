@@ -1,28 +1,16 @@
 // DAL 門震動訊號
 var y_value = 0;
 var myFirebase;
-var val_1 = "";
-// var aseKey = "39398890";
+var date;
+var val_1;
 
-myFirebase = new Firebase('https://test-project-97787-default-rtdb.firebaseio.com/ntnu');
+myFirebase = new Firebase('https://test-project-97787-default-rtdb.firebaseio.com/AMMRC');
 myFirebase.limitToLast(1).on('child_added', function (snapshot) {
     val_1 = snapshot.val().valus;
-    console.log("val_1 => ", val_1);
     y_value = Number(val_1);
-    // console.log("type of val_1 =>", typeof(val_1));
-
-    // var decrypt = CryptoJS.AES.decrypt(val_1, CryptoJS.enc.Utf8.parse(aseKey), {
-    //     mode: CryptoJS.mode.ECB,
-    //     padding: CryptoJS.pad.Pkcs7
-    // }).toString(CryptoJS.enc.Utf8);
-    // console.log("decrypt => ", decrypt);
-    
-    
-    // y_value = Number(decrypt);
-    // console.log(y_value);
-    // console.log(typeof(y_value));
+    console.log(val_1);
+    console.log(typeof(y_value));
 });
-
 
 $(document).ready(function() {  
     var chart = {
@@ -42,13 +30,14 @@ $(document).ready(function() {
     };
 
     var title = {
-        text: '機台震動情況'   
+        text: 'PI LAB 機台震動狀態'   
     };  
 
     var credits={
         enabled: false
     };
     
+
 
     var xAxis = {
         type: 'datetime',
