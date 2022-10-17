@@ -1,0 +1,24 @@
+#demo-area-01-show { 
+    font-size: 60px; 
+    pointer-events: auto!important; 
+}
+
+.img_card{
+    height: 80px;
+    /* margin-top: 27px; */
+}
+
+html, body {
+    height:100%;
+    width:100%;
+    margin:0;
+}
+
+.h_iframe iframe {
+    width:100%;
+    height:100%;
+}
+.h_iframe {
+    height: 100%;
+    width:100%;
+}
