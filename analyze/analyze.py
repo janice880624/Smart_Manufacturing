@@ -6,7 +6,7 @@ import matplotlib.animation as animation
 from matplotlib.pyplot import MultipleLocator
 
 # 開啟 CSV 檔案
-with open(r"ntnu.csv", newline='',encoding="utf-8-sig") as csvfile:
+with open(r"ntnu_z.csv", newline='',encoding="utf-8-sig") as csvfile:
   # 讀取 CSV 檔案內容
   rows = csv.reader(csvfile)
   line = []
