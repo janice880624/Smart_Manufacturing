@@ -6,7 +6,7 @@ import matplotlib.animation as animation
 from matplotlib.pyplot import MultipleLocator
 
 # 開啟 CSV 檔案
-with open(r"ntnu_z.csv", newline='',encoding="utf-8-sig") as csvfile:
+with open(r"MicroHeat_z.csv", newline='',encoding="utf-8-sig") as csvfile:
   # 讀取 CSV 檔案內容
   rows = csv.reader(csvfile)
   line = []
@@ -42,16 +42,20 @@ gs = gridspec.GridSpec(3,3)
 for i in range(len(line)):
 
     ax1 = plt.subplot(gs[0, :]) 
+
+    # The X-axis:time  The Y-axis:For calculation
+    # The X-axis:time  The Y-axis:Z
     
-    plt.title("The X-axis:time  The Y-axis:For calculation", fontsize=10, color='red')
+    plt.title("The X-axis:time  The Y-axis:Z", fontsize=10, color='red')
     ax1.set_xticklabels([])#消除x座標值
     ax1.set_xticks([])#消除x座標刻度
     
     
-    y_major_locator = MultipleLocator(0.5)
+    y_major_locator = MultipleLocator(0.05)
     ax1.yaxis.set_major_locator(y_major_locator)
     
-    plt.ylim(-2, 1)
+    # plt.ylim(-0.15, 0.1)
+    plt.ylim(-0.1, 0.05)
 
     x.append((looo[i]))	# 添加i到x轴的數據中
     y.append((loo[i]))	# 添加i到y轴的數據中
@@ -59,7 +63,7 @@ for i in range(len(line)):
 
     ax1.plot(x, y, color='blue', linestyle='-')
     
-    plt.pause(0.5)  # 每0.0083秒跑出一筆數據
+    plt.pause(0.009)  # 每0.0083秒跑出一筆數據
     plt.clf() #刪除舊有內存資料
     
 
