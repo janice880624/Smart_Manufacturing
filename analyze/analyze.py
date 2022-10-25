@@ -2,7 +2,6 @@ from matplotlib import pyplot as plt
 import numpy as np
 import csv
 import matplotlib.gridspec as gridspec
-import matplotlib.animation as animation
 from matplotlib.pyplot import MultipleLocator
 
 # 開啟 CSV 檔案
@@ -59,12 +58,29 @@ for i in range(len(line)):
 
     x.append((looo[i]))	# 添加i到x轴的數據中
     y.append((loo[i]))	# 添加i到y轴的數據中
-    ax1.plot(x, y, color='blue', linestyle='-')  # 繪出當前x列表和y列表中的值的圖
+    ax1.plot(x, y, color='blue', linestyle='-')  # 繪出當前x列表和y列表中的值的
 
-    ax1.plot(x, y, color='blue', linestyle='-')
+
+
+    ax2 = plt.subplot(gs[1, :]) 
+    plt.title("The X-axis:time  The Y-axis:Z", fontsize=10, color='blue')
+    ax2.set_xticklabels([])#消除x座標值
+    ax2.set_xticks([])#消除x座標刻度
     
-    plt.pause(0.009)  # 每0.0083秒跑出一筆數據
-    plt.clf() #刪除舊有內存資料
+    
+    y_major_locator = MultipleLocator(0.05)
+    ax2.yaxis.set_major_locator(y_major_locator)
+    
+    # plt.ylim(-0.15, 0.1)
+    plt.ylim(-0.1, 0.05)
+
+    x.append((looo[i]))	# 添加i到x轴的數據中
+    y.append((loo[i]))	# 添加i到y轴的數據中
+    ax2.plot(x, y, color='blue', linestyle='-')  # 繪出當前x列表和y列表中的值的
+
+    plt.pause(0.01)  # 每0.0083秒跑出一筆數據
+    # plt.show()
+    # plt.clf() #刪除舊有內存資料
     
 
 
