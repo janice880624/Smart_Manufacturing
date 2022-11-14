@@ -1,4 +1,4 @@
-// DAL 門震動訊號
+// 師大無加密版本
 var y_value = 0;
 var myFirebase;
 var val_1 = "";
