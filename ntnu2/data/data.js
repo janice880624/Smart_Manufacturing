@@ -15,8 +15,7 @@ myFirebase.limitToLast(1).on('child_added', function (snapshot) {
         padding: CryptoJS.pad.Pkcs7
     }).toString(CryptoJS.enc.Utf8);
     console.log("decrypt => ", decrypt);
-    
-    
+   
     y_value = Number(decrypt);
     console.log(y_value);
     console.log(typeof(y_value));
